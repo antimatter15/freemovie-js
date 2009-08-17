@@ -1,0 +1,93 @@
+<!--Import the FreeMovieCompilerTollbox-->
+
+<script src="../php.js"></script>
+<script src="../freemoviecompiler2.js"></script>
+<script src="../freemoviecompilertoolbox2.js"></script>
+<script src="b64.js"></script>
+
+<script>
+
+	//-------------------------------------------------------
+	//  initialize new SWF object.
+
+	swf = new FreeMovieCompilerToolbox();
+
+	//-------------------------------------------------------
+	//  set the global parameters of your movie
+	//  frame size is in twips (1 twip = 20 pixels)
+
+	swf.SetSWFVersion(5);
+	swf.SetFrameSize(16000, 12000); // = 800 x 20, 600 x 20
+	swf.SetFrameRate(24.0); 
+	swf.SetBackgroundColor(255, 255, 255);
+
+	//-------------------------------------------------------
+	//  lights! camera! action!
+
+	swf.BeginMovie();
+
+	//-------------------------------------------------------
+	//  frame # 00000
+
+	CharacterInfo = swf.DefineStraightLine(2000, 8000, 4000, 10000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+	CharacterInfo = swf.DefineStraightLine(2000, 10000, 4000, 8000, 300, true, 255, 0, 0, 128);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineTriangle(6000, 8000, 8000, 10000, 10000, 8000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+	
+	CharacterInfo = swf.DefineRectangle(12000, 8000, 14000, 10000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefinePolygon(5, 3000, 6000, 1000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineBezierQuad(17, 6000, 5000, 8000, 9000, 10000, 5000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineBezierCubic(17, 12000, 5000, 12000, 7000, 14000, 5000, 14000, 7000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineCurvedLine(2000, 2000, 3000, 6000, 4000, 2000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineCircle(17, 6500, 3000, 1000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineArc(17, 10000, 3000, 0, 1.5 * Math.PI, 1000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	CharacterInfo = swf.DefineArcClosed(17, 13000, 3000, 0, 1.5 * Math.PI, 1000, 300, false, 0, 0, 0, 0);
+	CharacterDepth = swf.EasyPlaceObject(CharacterInfo["CharacterID"]);
+
+	//-------------------------------------------------------
+	//  end frame # 00000 
+
+	swf.EndFrame();
+
+	//-------------------------------------------------------
+	//  That's it, Folks! 
+
+	swf.EndMovie();
+
+	//-------------------------------------------------------
+	//  send movie to the browser 
+	
+	width = 800
+	height = 600
+	//RldTBcO3AAAAwoAAAcO0AAABdwAAGAEAQwLDv8O/w7/CnAABAHDDp0gbDnTCgcKwAAEsAQAAAAElwqfDkH0HwqvDqEHCgAAFAQEAAQAAHQgCAHDDp0gbDnTCgcKwAAEsAcO/AADCgAElwo/CoMO6HsKvwqDDugAABQECAAIAAMKkAAMAeW3CpMO0w4HDjsKIGwAAASwBAAAAASXDi8K4H0HDqsO6EGHDlcO0H0PCsgwAAAUBAwADAADCowAEAHrDpMKmw6jDgcOOwogbAAABLAEAAAABJcOrwrgHw5B6YMODwqHDtDpfQ8KiDAAFAQQABAAAwqwABQBww6dIGyXDpMOfcAABLAEAAAABJcOFw5wnEQAAdsOqw4/Cr0rCosO3W2gADsK9K3Rcw53CvU0ABQEFAAUAAEAAAAA=
+	//RldTBfcAAACAAAH0AAABdwAAGAEAQwL///+cAAEAcOdIGw50gbAAASwBAAAAASWn0H0Hq+hBgAAFAQEAAQAAHQgCAHDnSBsOdIGwAAEsAf8AAIABJY+g+h6voPoAAAUBAgACAACkAAMAeW2k9MHOiBsAAAEsAQAAAAEly7gfQer6EGHV9B9DsgwAAAUBAwADAACjAAQAeuSm6MHOiBsAAAEsAQAAAAEl67gH0Hpgw6H0Ol9DogwABQEEAAQAAKwABQBw50gbJeTfcAABLAEAAAABJcXcJxEAAHbqz69KovdbaAAOvSt0XN29TQAFAQUABQAAQAAAAA==
+  flash_b64 = Base64.encode(swf.GetMovie())
+  
+  flash_url = 'data:application/x-shockwave-flash;base64,'+flash_b64
+  proxy_url = 'http://antimatter15.com/misc/b64.php?'+flash_url.slice(5)
+  flash_html = '<object width="'+width+'" height="'+height+'">' +
+  '<param name="movie" value="'+proxy_url+'">' +
+  '<embed src="'+proxy_url+'" width="'+width+'" height="'+height+'">' +
+  '</embed></object><br>'+
+  'For some reason, I can\'t embed flash media with data:URIs like images, so to try it, so the above flash is sent through to be decoded (not generated) by a <a href="http://dean.edwards.name/weblog/2005/06/base64-ie/">server</a>. If you want entirely pure client-side, you have to <a href="'+flash_url+'">save it</a> onto your hard disk and open it locally. If you find a way that does work, please tell me at antimatter15@gmail.com' 
+  
+  document.write(flash_html);
+</script>
+
