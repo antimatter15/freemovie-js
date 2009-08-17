@@ -1,0 +1,11 @@
+fle = open("freemoviecompilertoolbox.js","r")
+src = fle.read()
+src = src.replace("max(","Math.max(")
+src = src.replace("min(","Math.min(")
+src = src.replace("pow(","Math.pow(")
+src = src.replace("round(","Math.round(")
+src = src.replace("ceil(","Math.ceil(")
+src = src.replace("abs(","Math.abs(")
+src = src.replace("intval(","parseInt(")
+src = src.replace("chr(","String.fromCharCode(")
+print src

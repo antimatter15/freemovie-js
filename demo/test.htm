@@ -1,0 +1,80 @@
+
+<script src="../php.default.min.js"></script>
+<script src="../php.js"></script>
+<script src="../freemoviecompiler2.js"></script>
+<script src="../freemoviecompilertoolbox2.js"></script>
+<script src="b64.js"></script>
+<script>
+/**
+ * it's a shitty test suite, but it's better than nothing
+ * --Jacek
+ */
+
+//require_once("freemoviecompiler.php");
+
+$fmc = new FreeMovieCompiler();
+
+document.write("\n<h1>Testing FreeMovieCompiler</h1>");
+document.write("\n-----------------------------------------------------------------");
+document.write("\n<h2>Testing packUI8</h2>");
+
+/**
+ * test: packUI8() result string length equal to 1
+ */
+for ($n = 0; $n < 256; $n++){
+    $r = $fmc.packUI8($n);
+    if (strlen($r) != 1) {
+        document.write("<p>Error: The string length is not equal to 1!</p>")
+    }
+}
+    document.write("\n<p>packUI8(): string length test passed OK.</p>");
+
+/**
+ * test: packUI8() . ord()
+ */
+for ($n = 0; $n < 256; $n++){
+    $r = $fmc.packUI8($n);
+    if (ord($r) != $n) {
+        document.write("<p>Error: The string returned by packUI8 does not convert back into the original arguement!</p>");
+    }
+}
+    document.write("\n<p>packUI8(): packUI8() and ord() test passed OK.</p>");
+
+document.write("\n<h2>Testing packUI16</h2>");
+
+/**
+ * test: packUI8() vs. native pack()
+ */
+//for ($n = 0; $n < 256; $n++){
+//    $r = $fmc.packUI8($n);
+//    if ($r != pack("C", $n)) {
+//        document.write("<p>Error: The string returned by packUI8 is not the same as the string returned by the native pack()!</p>");
+//    }
+//}
+    document.write("\n<p>packUI8() vs. native pack() test passed OK.</p>");
+
+document.write("\n<h2>Testing packUI16</h2>");
+
+/**
+ * test: packUI16() result string equal to 2
+ */
+for ($n = 0; $n < 65535; $n++){
+    $r = $fmc.packUI16($n);
+    if (strlen($r) != 2) {
+        document.write("<p>Error: The string length is not equal to 2!</p>");
+    }
+}
+    document.write("\n<p>String length test passed OK.</p>");
+
+/**
+ * test: packUI16() vs. native pack()
+ */
+//for ($n = 0; $n < 65535; $n++){
+//    $r = $fmc.packUI16($n);
+//    if ($r != pack("v", $n)) {
+//        document.write("<p>Error: The string returned by packUI16 is not the same as the string returned by the native pack()!</p>");
+//    }
+//}
+//    document.write("\n<p>packUI16() vs. native pack() test passed OK.</p>");
+
+</script>
